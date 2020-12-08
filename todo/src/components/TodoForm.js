@@ -1,10 +1,8 @@
 import React, {useState,useReducer,useEffect} from "react";
 import reducer, { initialState } from "../reducer/index"
-import {setNewItem, addTodo} from "../actions/index"
+import {setNewItem, addTodo, removeCompleted} from "../actions/index"
 
-console.log(initialState)
-let currentState= reducer(initialState, {type:"ADD_TODO",payload:'THING!'})
-console.log (currentState)
+
 
 
 
@@ -23,6 +21,10 @@ const TodoForm= ({dispatch, state}) =>{
         setInput(e.target.value)
       };
 
+    const handleClear=e=>{
+        e.preventDefault();
+        dispatch(removeCompleted(state.todos))}
+
       
     console.log("state",state)
 
@@ -33,7 +35,7 @@ const TodoForm= ({dispatch, state}) =>{
                 <input value={input} onChange={handleChanges} type="text" name="todo" />
                 <button onClick={handleAdd}>Add Todo</button>
             </form>
-                <button  className="clearbtn">Clear Completed</button>
+                <button onClick={handleClear}  className="clearbtn">Clear Completed</button>
             
         </div>
     

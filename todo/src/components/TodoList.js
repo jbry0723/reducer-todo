@@ -17,7 +17,7 @@ const TodoList= ({dispatch, state}) =>{
                 return(
                     
                     <div>
-            <Todo  dispatch={dispatch} key={item.id} todo={item} />
+            <Todo  state={state} dispatch={dispatch} key={item.id} todo={item} />
         
         </div>
                 )

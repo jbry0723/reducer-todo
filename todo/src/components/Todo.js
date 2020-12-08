@@ -4,11 +4,11 @@ import reducer, {initialState} from "../reducer"
 
 
 
-const Todo= props =>{
+const Todo= (props) =>{
     console.log('props',props)
     const handleClick=()=>{
-        console.log(props.todo.id)
-        toggleComplete(props.todo.id)
+        
+        props.dispatch(toggleComplete(props.todo.id, props.state.todos))
     }
     return(
         <div 
