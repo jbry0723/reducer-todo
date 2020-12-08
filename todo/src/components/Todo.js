@@ -1,14 +1,20 @@
-import React from 'react';
+import React, {useReducer} from 'react';
+import {toggleComplete} from "../actions/index"
+import reducer, {initialState} from "../reducer"
+
+
 
 const Todo= props =>{
+    console.log('props',props)
     const handleClick=()=>{
-        props.handleToggle(props.id)
+        console.log(props.todo.id)
+        toggleComplete(props.todo.id)
     }
     return(
         <div 
-        onClick={handleClick} //why didn't {props.handleToggle(props.id)} work here?!
-        className={`${props.completed ? 'completed': ''}`}>
-            <p>{props.todo}</p>
+        onClick={handleClick} 
+        className={`${props.todo.completed ? 'completed': ''}`}>
+            <p>{props.todo.item}</p>
         </div>
     )
 }

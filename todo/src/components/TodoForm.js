@@ -1,6 +1,6 @@
-import React, {useState,useReducer} from "react";
+import React, {useState,useReducer,useEffect} from "react";
 import reducer, { initialState } from "../reducer/index"
-import {setNewItem} from "../actions/index"
+import {setNewItem, addTodo} from "../actions/index"
 
 console.log(initialState)
 let currentState= reducer(initialState, {type:"ADD_TODO",payload:'THING!'})
@@ -8,20 +8,32 @@ console.log (currentState)
 
 
 
-const TodoForm= props =>{
-    const [state,dispatch]=useReducer(reducer,initialState)
+const TodoForm= ({dispatch, state}) =>{
+    const [input, setInput]= useState("")
+
+    
+    
+
+    const handleAdd=e=>{
+        e.preventDefault();
+        dispatch(addTodo(input))
+    }
 
     const handleChanges = e => {
-        dispatch(setNewItem(e.target.value))
+        setInput(e.target.value)
       };
-    console.log("currentState",state)
+
+      
+    console.log("state",state)
+
+    
     return(
         <div>
             <form>
-                <input value={state.item} onChange={handleChanges} type="text" name="todo" />
-                <button>Add Todo</button>
+                <input value={input} onChange={handleChanges} type="text" name="todo" />
+                <button onClick={handleAdd}>Add Todo</button>
             </form>
-                <button onClick={props.clearCompleted} className="clearbtn">Clear Completed</button>
+                <button  className="clearbtn">Clear Completed</button>
             
         </div>
     
